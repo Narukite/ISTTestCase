@@ -9,7 +9,7 @@ import com.unknowncompany.isttestcase.R
 import com.unknowncompany.isttestcase.app.model.MainMovie
 import com.unknowncompany.isttestcase.databinding.ItemMovieBinding
 
-class MainAdapter(private val movies: List<MainMovie>) :
+class MainAdapter(private val movies: List<MainMovie>, private val listener: MovieListener) :
     RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -19,7 +19,12 @@ class MainAdapter(private val movies: List<MainMovie>) :
             val item = movies[position]
             Glide.with(itemView.context).load(item.posterPath).into(binding.ivMoviePoster)
             binding.tvMovieTitle.text = item.originalTitle
+            binding.cl.setOnClickListener { listener.onItemClick(item.id) }
         }
+    }
+
+    interface MovieListener {
+        fun onItemClick(movieId: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =

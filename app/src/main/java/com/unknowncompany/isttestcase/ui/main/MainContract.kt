@@ -18,6 +18,7 @@ interface MainContract {
         fun bindView(view: View)
         fun unbindView()
         fun onViewCreated()
+        fun onItemClicked(movieId: Int)
     }
 
     interface Interactor {
@@ -27,6 +28,7 @@ interface MainContract {
     }
 
     interface Router {
+        fun openMovieDetails(movieId: Int)
     }
 
     interface Repo {

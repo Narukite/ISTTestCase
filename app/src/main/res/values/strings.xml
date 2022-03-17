@@ -3,4 +3,6 @@
     <string name="now_playing">Now Playing</string>
     <string name="see_all">See all</string>
     <string name="upcoming">Upcoming</string>
+    <string name="overview">Overview</string>
+    <string name="template_viewers">%s Viewers</string>
 </resources>

@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, AndroidScopeCompone
 
     private lateinit var binding: ActivityMainBinding
     override val scope: Scope by activityScope()
-    private val router: MainContract.Router by inject { parametersOf(this@MainActivity) }
+    private val router: MainContract.Router by inject { parametersOf(this) }
     private val presenter: MainContract.Presenter by inject { parametersOf(router) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,11 +58,19 @@ class MainActivity : AppCompatActivity(), MainContract.View, AndroidScopeCompone
     }
 
     override fun publishDataForNowPlaying(data: List<MainMovie>) {
-        binding.rvNowPlaying.adapter = MainAdapter(data)
+        binding.rvNowPlaying.adapter = MainAdapter(data, object : MainAdapter.MovieListener {
+            override fun onItemClick(movieId: Int) {
+                presenter.onItemClicked(movieId)
+            }
+        })
     }
 
     override fun publishDataForUpcoming(data: List<MainMovie>) {
-        binding.rvUpcoming.adapter = MainAdapter(data)
+        binding.rvUpcoming.adapter = MainAdapter(data, object : MainAdapter.MovieListener {
+            override fun onItemClick(movieId: Int) {
+                presenter.onItemClicked(movieId)
+            }
+        })
     }
 
     override fun showMessage(msg: String) {
