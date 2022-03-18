@@ -1,11 +1,11 @@
-package com.unknowncompany.isttestcase.ui.main
+package com.unknowncompany.isttestcase.ui.seeall
 
 import com.unknowncompany.isttestcase.app.model.Movie
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class MainInteractor(private val repo: MainContract.Repo) : MainContract.Interactor {
+class SeeAllInteractor(private val repo: SeeAllContract.Repo) : SeeAllContract.Interactor {
 
     private val compositeDisposable = CompositeDisposable()
 

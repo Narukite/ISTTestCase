@@ -16,12 +16,14 @@ class DetailPresenter(
         interactor.dispose()
     }
 
-    override fun onViewCreated(movieId: Int) {
+    override fun onViewCreated() {
         view?.showLoading()
-        interactor.getMovieDetails(movieId, {
-            view?.hideLoading()
-            view?.populateView(it)
-        }, this::onError)
+        view?.getMovieIdFromIntent()?.let { movieId ->
+            interactor.getMovieDetails(movieId, { data ->
+                view?.hideLoading()
+                view?.populateView(data)
+            }, this::onError)
+        }
     }
 
     override fun onBackClicked() {

@@ -20,7 +20,7 @@ import org.koin.core.scope.Scope
 class DetailActivity : AppCompatActivity(), DetailContract.View, AndroidScopeComponent {
 
     companion object {
-        const val MOVIE_ID = "movieId"
+        private const val MOVIE_ID = "movieId"
 
         fun launch(context: Context, movieId: Int) {
             val intent = Intent(context, DetailActivity::class.java)
@@ -39,11 +39,15 @@ class DetailActivity : AppCompatActivity(), DetailContract.View, AndroidScopeCom
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val movieId = intent?.getIntExtra(MOVIE_ID, -1) as Int
-        if (movieId == -1) finish()
         initView()
         presenter.bindView(this)
-        presenter.onViewCreated(movieId)
+        presenter.onViewCreated()
+    }
+
+    override fun getMovieIdFromIntent(): Int {
+        val movieId = intent?.getIntExtra(MOVIE_ID, -1) as Int
+        if (movieId == -1) presenter.onBackClicked()
+        return movieId
     }
 
     override fun showLoading() {

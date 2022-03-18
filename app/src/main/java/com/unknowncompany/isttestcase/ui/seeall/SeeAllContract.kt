@@ -1,16 +1,16 @@
-package com.unknowncompany.isttestcase.ui.main
+package com.unknowncompany.isttestcase.ui.seeall
 
 import com.unknowncompany.isttestcase.app.model.Movie
 import io.reactivex.Single
 
-interface MainContract {
+interface SeeAllContract {
     interface View {
-        fun showLoadingForNowPLaying()
-        fun hideLoadingForNowPlaying()
-        fun showLoadingForUpcoming()
-        fun hideLoadingForUpcoming()
-        fun publishDataForNowPlaying(data: List<Movie>)
-        fun publishDataForUpcoming(data: List<Movie>)
+        fun getMoviesTypeFromIntent(): String
+        fun showLoading()
+        fun showLoadingAndHideList()
+        fun hideLoading()
+        fun hideLoadingAndShowList()
+        fun publishData(data: List<Movie>)
         fun showMessage(msg: String)
     }
 
@@ -18,9 +18,9 @@ interface MainContract {
         fun bindView(view: View)
         fun unbindView()
         fun onViewCreated()
+        fun onBackClicked()
         fun onItemClicked(movieId: Int)
-        fun onSeeAllOfNowPlayingClicked()
-        fun onSeeAllOfUpcomingClicked()
+        fun onLastItemReached()
     }
 
     interface Interactor {
@@ -30,9 +30,8 @@ interface MainContract {
     }
 
     interface Router {
+        fun finish()
         fun openMovieDetails(movieId: Int)
-        fun openMoviesSeeAllOfNowPlaying()
-        fun openMoviesSeeAllOfUpcoming()
     }
 
     interface Repo {

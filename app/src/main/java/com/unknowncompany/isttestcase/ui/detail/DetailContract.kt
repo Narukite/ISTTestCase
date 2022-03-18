@@ -5,6 +5,7 @@ import io.reactivex.Single
 
 interface DetailContract {
     interface View {
+        fun getMovieIdFromIntent(): Int
         fun showLoading()
         fun hideLoading()
         fun populateView(data: DetailMovie)
@@ -14,7 +15,7 @@ interface DetailContract {
     interface Presenter {
         fun bindView(view: View)
         fun unbindView()
-        fun onViewCreated(movieId: Int)
+        fun onViewCreated()
         fun onBackClicked()
     }
 

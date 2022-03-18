@@ -6,7 +6,7 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.unknowncompany.isttestcase.app.model.MainMovie
+import com.unknowncompany.isttestcase.app.model.Movie
 import com.unknowncompany.isttestcase.databinding.ActivityMainBinding
 import com.unknowncompany.isttestcase.ui.main.adapter.MainAdapter
 import org.koin.android.ext.android.inject
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, AndroidScopeCompone
         binding.cpiUpcoming.visibility = GONE
     }
 
-    override fun publishDataForNowPlaying(data: List<MainMovie>) {
+    override fun publishDataForNowPlaying(data: List<Movie>) {
         binding.rvNowPlaying.adapter = MainAdapter(data, object : MainAdapter.MovieListener {
             override fun onItemClick(movieId: Int) {
                 presenter.onItemClicked(movieId)
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, AndroidScopeCompone
         })
     }
 
-    override fun publishDataForUpcoming(data: List<MainMovie>) {
+    override fun publishDataForUpcoming(data: List<Movie>) {
         binding.rvUpcoming.adapter = MainAdapter(data, object : MainAdapter.MovieListener {
             override fun onItemClick(movieId: Int) {
                 presenter.onItemClicked(movieId)
@@ -94,5 +94,7 @@ class MainActivity : AppCompatActivity(), MainContract.View, AndroidScopeCompone
             setHasFixedSize(true)
             layoutManager = manager
         }
+        binding.tvNowPlayingSeeAll.setOnClickListener { presenter.onSeeAllOfNowPlayingClicked() }
+        binding.tvUpcomingSeeAll.setOnClickListener { presenter.onSeeAllOfUpcomingClicked() }
     }
 }

@@ -35,6 +35,14 @@ class MainPresenter(
         router.openMovieDetails(movieId)
     }
 
+    override fun onSeeAllOfNowPlayingClicked() {
+        router.openMoviesSeeAllOfNowPlaying()
+    }
+
+    override fun onSeeAllOfUpcomingClicked() {
+        router.openMoviesSeeAllOfUpcoming()
+    }
+
     private fun onErrorForNowPlaying(error: Throwable) {
         Log.d(MainPresenter::class.simpleName, "onErrorForNowPlaying: ${error.message}")
 
